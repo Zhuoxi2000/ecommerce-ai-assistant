@@ -1,0 +1,382 @@
+[
+    {
+      "title": "Canon EOS Rebel T7 数码单反相机",
+      "description": "适合初学者的入门级单反相机，配备2410万像素CMOS传感器和DIGIC 4+图像处理器，支持全高清视频录制。",
+      "price": 399.99,
+      "currency": "USD",
+      "category": "相机",
+      "subcategory": "单反相机",
+      "brand": "Canon",
+      "image_url": "https://example.com/images/canon-t7.jpg",
+      "features": {
+        "像素": "2410万",
+        "传感器类型": "APS-C CMOS",
+        "重量": "480克",
+        "续航": "约500张",
+        "防抖": "电子防抖",
+        "可拆卸镜头": "是"
+      },
+      "rating": 4.5,
+      "review_count": 2150
+    },
+    {
+      "title": "Sony Alpha a6000 无反相机",
+      "description": "轻巧紧凑的无反相机，配备2430万像素APS-C传感器，179点相位检测自动对焦系统，每秒11张连拍，适合旅行和日常拍摄。",
+      "price": 648.00,
+      "currency": "USD",
+      "category": "相机",
+      "subcategory": "无反相机",
+      "brand": "Sony",
+      "image_url": "https://example.com/images/sony-a6000.jpg",
+      "features": {
+        "像素": "2430万",
+        "传感器类型": "APS-C Exmor CMOS",
+        "重量": "344克",
+        "续航": "约360张",
+        "防抖": "镜头防抖",
+        "可拆卸镜头": "是"
+      },
+      "rating": 4.7,
+      "review_count": 3800
+    },
+    {
+      "title": "Nikon COOLPIX B500 数码相机",
+      "description": "入门级长焦相机，配备40倍光学变焦尼克尔镜头，1600万像素，支持WiFi、NFC和蓝牙连接，适合旅行和家庭使用。",
+      "price": 256.95,
+      "currency": "USD",
+      "category": "相机",
+      "subcategory": "长焦相机",
+      "brand": "Nikon",
+      "image_url": "https://example.com/images/nikon-b500.jpg",
+      "features": {
+        "像素": "1600万",
+        "传感器类型": "1/2.3英寸CMOS",
+        "光学变焦": "40倍",
+        "重量": "541克",
+        "续航": "约600张",
+        "防抖": "光学防抖",
+        "可拆卸镜头": "否"
+      },
+      "rating": 4.3,
+      "review_count": 1850
+    },
+    {
+      "title": "GoPro HERO9 Black 运动相机",
+      "description": "专业级运动相机，5K视频录制，2000万像素照片，HyperSmooth 3.0增强防抖，防水10米，前置彩色显示屏。",
+      "price": 349.99,
+      "currency": "USD",
+      "category": "相机",
+      "subcategory": "运动相机",
+      "brand": "GoPro",
+      "image_url": "https://example.com/images/gopro-hero9.jpg",
+      "features": {
+        "像素": "2000万",
+        "传感器类型": "CMOS",
+        "重量": "158克",
+        "续航": "约2小时录像",
+        "防抖": "HyperSmooth 3.0",
+        "防水深度": "10米",
+        "可拆卸镜头": "否"
+      },
+      "rating": 4.8,
+      "review_count": 4200
+    },
+    {
+      "title": "Ricoh GR III 便携相机",
+      "description": "口袋大小的专业级相机，配备24.2MP APS-C传感器，28mm f/2.8镜头，3轴图像稳定，适合街拍和旅行。",
+      "price": 896.95,
+      "currency": "USD",
+      "category": "相机",
+      "subcategory": "便携相机",
+      "brand": "Ricoh",
+      "image_url": "https://example.com/images/ricoh-gr3.jpg",
+      "features": {
+        "像素": "2420万",
+        "传感器类型": "APS-C CMOS",
+        "光圈": "f/2.8",
+        "重量": "257克",
+        "续航": "约200张",
+        "防抖": "3轴防抖",
+        "可拆卸镜头": "否"
+      },
+      "rating": 4.6,
+      "review_count": 950
+    },
+    {
+      "title": "Apple iPhone 13 Pro",
+      "description": "搭载A15仿生芯片的高端智能手机，配备6.1英寸超视网膜XDR显示屏，Pro级三摄系统，支持5G网络。",
+      "price": 999.00,
+      "currency": "USD",
+      "category": "手机",
+      "subcategory": "智能手机",
+      "brand": "Apple",
+      "image_url": "https://example.com/images/iphone-13-pro.jpg",
+      "features": {
+        "屏幕尺寸": "6.1英寸",
+        "分辨率": "2532 x 1170",
+        "处理器": "A15仿生",
+        "存储": "128GB/256GB/512GB/1TB",
+        "摄像头": "12MP三摄",
+        "电池容量": "约3095mAh",
+        "防水等级": "IP68"
+      },
+      "rating": 4.8,
+      "review_count": 9500
+    },
+    {
+      "title": "Samsung Galaxy S21 Ultra",
+      "description": "三星旗舰智能手机，6.8英寸动态AMOLED 2X显示屏，1亿800万像素主摄，100倍空间变焦，支持S Pen。",
+      "price": 1199.99,
+      "currency": "USD",
+      "category": "手机",
+      "subcategory": "智能手机",
+      "brand": "Samsung",
+      "image_url": "https://example.com/images/samsung-s21-ultra.jpg",
+      "features": {
+        "屏幕尺寸": "6.8英寸",
+        "分辨率": "3200 x 1440",
+        "处理器": "骁龙888/Exynos 2100",
+        "存储": "128GB/256GB/512GB",
+        "摄像头": "1亿800万像素四摄",
+        "电池容量": "5000mAh",
+        "防水等级": "IP68"
+      },
+      "rating": 4.7,
+      "review_count": 7800
+    },
+    {
+      "title": "Google Pixel 6 Pro",
+      "description": "谷歌旗舰智能手机，采用自研Tensor芯片，6.7英寸LTPO OLED显示屏，5000万像素主摄，支持30W快充。",
+      "price": 899.00,
+      "currency": "USD",
+      "category": "手机",
+      "subcategory": "智能手机",
+      "brand": "Google",
+      "image_url": "https://example.com/images/pixel-6-pro.jpg",
+      "features": {
+        "屏幕尺寸": "6.7英寸",
+        "分辨率": "3120 x 1440",
+        "处理器": "Google Tensor",
+        "存储": "128GB/256GB/512GB",
+        "摄像头": "5000万像素三摄",
+        "电池容量": "5003mAh",
+        "防水等级": "IP68"
+      },
+      "rating": 4.5,
+      "review_count": 3200
+    },
+    {
+      "title": "Xiaomi Redmi Note 10 Pro",
+      "description": "高性价比中端智能手机，6.67英寸AMOLED显示屏，1亿800万像素四摄，5020mAh大电池，支持33W快充。",
+      "price": 279.99,
+      "currency": "USD",
+      "category": "手机",
+      "subcategory": "智能手机",
+      "brand": "Xiaomi",
+      "image_url": "https://example.com/images/redmi-note-10-pro.jpg",
+      "features": {
+        "屏幕尺寸": "6.67英寸",
+        "分辨率": "2400 x 1080",
+        "处理器": "骁龙732G",
+        "存储": "64GB/128GB",
+        "摄像头": "1亿800万像素四摄",
+        "电池容量": "5020mAh",
+        "防水等级": "IP53"
+      },
+      "rating": 4.4,
+      "review_count": 5600
+    },
+    {
+      "title": "OnePlus 9 Pro",
+      "description": "性能强劲的旗舰智能手机，6.7英寸Fluid AMOLED显示屏，哈苏合作四摄系统，骁龙888处理器，支持65W闪充。",
+      "price": 969.00,
+      "currency": "USD",
+      "category": "手机",
+      "subcategory": "智能手机",
+      "brand": "OnePlus",
+      "image_url": "https://example.com/images/oneplus-9-pro.jpg",
+      "features": {
+        "屏幕尺寸": "6.7英寸",
+        "分辨率": "3216 x 1440",
+        "处理器": "骁龙888",
+        "存储": "128GB/256GB",
+        "摄像头": "4800万像素四摄",
+        "电池容量": "4500mAh",
+        "防水等级": "IP68"
+      },
+      "rating": 4.6,
+      "review_count": 4100
+    },
+    {
+      "name": "轻薄笔记本电脑",
+      "description": "超轻薄设计，搭载高性能处理器，适合商务人士使用。",
+      "price": 5999.00,
+      "currency": "CNY",
+      "category": "电子产品",
+      "stock": 100,
+      "image_url": "https://example.com/images/laptop.jpg",
+      "sku": "LP-001",
+      "tags": ["笔记本", "轻薄", "商务"],
+      "attributes": {
+        "处理器": "Intel Core i7",
+        "内存": "16GB",
+        "存储": "512GB SSD",
+        "屏幕尺寸": "14英寸",
+        "重量": "1.2kg"
+      }
+    },
+    {
+      "name": "智能手机旗舰版",
+      "description": "最新旗舰智能手机，配备高清摄像头和强大性能。",
+      "price": 4999.00,
+      "currency": "CNY",
+      "category": "电子产品",
+      "stock": 200,
+      "image_url": "https://example.com/images/smartphone.jpg",
+      "sku": "SP-002",
+      "tags": ["手机", "旗舰", "高清摄像"],
+      "attributes": {
+        "处理器": "骁龙8系列",
+        "内存": "12GB",
+        "存储": "256GB",
+        "屏幕尺寸": "6.7英寸",
+        "摄像头": "1亿像素"
+      }
+    },
+    {
+      "name": "真无线蓝牙耳机",
+      "description": "高品质音效，长续航，支持主动降噪的真无线蓝牙耳机。",
+      "price": 999.00,
+      "currency": "CNY",
+      "category": "电子产品",
+      "stock": 300,
+      "image_url": "https://example.com/images/earbuds.jpg",
+      "sku": "EB-003",
+      "tags": ["耳机", "蓝牙", "降噪"],
+      "attributes": {
+        "续航时间": "24小时",
+        "连接": "蓝牙5.2",
+        "降噪": "主动降噪",
+        "防水等级": "IPX5"
+      }
+    },
+    {
+      "name": "男士休闲衬衫",
+      "description": "舒适透气的纯棉休闲衬衫，适合各种场合穿着。",
+      "price": 199.00,
+      "currency": "CNY",
+      "category": "服装",
+      "stock": 500,
+      "image_url": "https://example.com/images/shirt.jpg",
+      "sku": "CS-004",
+      "tags": ["衬衫", "男士", "休闲"],
+      "attributes": {
+        "材质": "100%棉",
+        "颜色": "蓝色",
+        "尺寸": ["M", "L", "XL"],
+        "季节": "四季"
+      }
+    },
+    {
+      "name": "女士运动鞋",
+      "description": "轻量缓震的女士运动鞋，适合日常运动和休闲穿着。",
+      "price": 499.00,
+      "currency": "CNY",
+      "category": "鞋履",
+      "stock": 400,
+      "image_url": "https://example.com/images/sneakers.jpg",
+      "sku": "SN-005",
+      "tags": ["运动鞋", "女士", "缓震"],
+      "attributes": {
+        "材质": "网面+橡胶底",
+        "颜色": "粉色",
+        "尺寸": ["36", "37", "38", "39"],
+        "鞋底": "防滑耐磨"
+      }
+    },
+    {
+      "name": "智能手表",
+      "description": "多功能智能手表，支持健康监测和运动追踪。",
+      "price": 1299.00,
+      "currency": "CNY",
+      "category": "电子产品",
+      "stock": 150,
+      "image_url": "https://example.com/images/smartwatch.jpg",
+      "sku": "SW-006",
+      "tags": ["手表", "智能", "健康"],
+      "attributes": {
+        "屏幕": "AMOLED",
+        "电池续航": "14天",
+        "防水": "50米防水",
+        "功能": ["心率监测", "血氧监测", "睡眠监测"]
+      }
+    },
+    {
+      "name": "北欧风格餐桌",
+      "description": "简约北欧风格的实木餐桌，美观耐用。",
+      "price": 2999.00,
+      "currency": "CNY",
+      "category": "家具",
+      "stock": 50,
+      "image_url": "https://example.com/images/table.jpg",
+      "sku": "FT-007",
+      "tags": ["餐桌", "北欧风", "实木"],
+      "attributes": {
+        "材质": "橡木",
+        "尺寸": "120x80x75cm",
+        "颜色": "原木色",
+        "承重": "100kg"
+      }
+    },
+    {
+      "name": "全自动咖啡机",
+      "description": "一键制作多种咖啡的全自动咖啡机，简单易用。",
+      "price": 3499.00,
+      "currency": "CNY",
+      "category": "厨房电器",
+      "stock": 80,
+      "image_url": "https://example.com/images/coffeemaker.jpg",
+      "sku": "CM-008",
+      "tags": ["咖啡机", "自动", "家用"],
+      "attributes": {
+        "容量": "1.5L",
+        "功率": "1450W",
+        "压力": "19帕",
+        "功能": ["磨豆", "奶泡", "热水"]
+      }
+    },
+    {
+      "name": "有机杂粮礼盒",
+      "description": "精选多种有机杂粮，健康营养的礼盒装。",
+      "price": 299.00,
+      "currency": "CNY",
+      "category": "食品",
+      "stock": 200,
+      "image_url": "https://example.com/images/grains.jpg",
+      "sku": "FD-009",
+      "tags": ["杂粮", "有机", "礼盒"],
+      "attributes": {
+        "净含量": "2.5kg",
+        "保质期": "12个月",
+        "产地": "东北",
+        "成分": ["燕麦", "藜麦", "黑米", "红豆"]
+      }
+    },
+    {
+      "name": "双肩电脑背包",
+      "description": "大容量防水双肩电脑背包，适合商务出行和日常通勤。",
+      "price": 399.00,
+      "currency": "CNY",
+      "category": "箱包",
+      "stock": 300,
+      "image_url": "https://example.com/images/backpack.jpg",
+      "sku": "BP-010",
+      "tags": ["背包", "电脑包", "防水"],
+      "attributes": {
+        "材质": "防水尼龙",
+        "容量": "25L",
+        "尺寸": "45x30x15cm",
+        "功能": ["防盗", "USB充电"]
+      }
+    }
+  ]
