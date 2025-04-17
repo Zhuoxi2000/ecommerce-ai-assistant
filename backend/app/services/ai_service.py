@@ -95,36 +95,130 @@ class AIService:
         """
     
     def _mock_intent_data(self, query: str) -> Dict[str, Any]:
-        """生成模拟意图数据"""
-        # 简单的关键词提取
-        words = query.lower().split()
+        """生成模拟意图数据，增强对价格区间和产品类型的理解"""
+        # 转换为小写并分词
+        query_lower = query.lower()
+        words = query_lower.split()
         
         # 识别可能的产品类型
-        product_types = ["手机", "电脑", "相机", "耳机", "衣服", "鞋子", "家具", "食品"]
-        product_type = next((w for w in words if w in product_types), "其他")
+        product_categories = {
+            "手机": ["手机", "智能手机", "phone", "iphone", "华为", "小米", "三星", "oppo", "vivo"],
+            "电脑": ["电脑", "笔记本", "台式机", "平板", "laptop", "macbook", "surface", "thinkpad"],
+            "相机": ["相机", "单反", "微单", "camera", "gopro", "佳能", "尼康", "索尼"],
+            "耳机": ["耳机", "airpods", "蓝牙耳机", "headphone", "earphone", "耳麦"],
+            "服装": ["衣服", "裤子", "鞋子", "外套", "连衣裙", "t恤", "牛仔裤", "夹克"],
+            "家具": ["家具", "桌子", "椅子", "沙发", "床", "柜子", "书架"],
+            "食品": ["食品", "零食", "饮料", "水果", "蔬菜", "肉类", "海鲜", "糕点"]
+        }
         
-        # 识别可能的价格范围
+        # 检查产品类型
+        identified_category = "其他"
+        for category, keywords in product_categories.items():
+            for keyword in keywords:
+                if keyword in query_lower:
+                    identified_category = category
+                    break
+            if identified_category != "其他":
+                break
+        
+        # 识别可能的品牌
+        common_brands = {
+            "手机": ["苹果", "华为", "小米", "三星", "oppo", "vivo", "荣耀"],
+            "电脑": ["苹果", "联想", "戴尔", "惠普", "华硕", "微软", "宏碁"],
+            "相机": ["佳能", "尼康", "索尼", "富士", "松下", "奥林巴斯", "徕卡", "gopro"],
+            "耳机": ["苹果", "索尼", "bose", "森海塞尔", "beats", "华为", "小米"]
+        }
+        
+        identified_brands = []
+        relevant_brands = common_brands.get(identified_category, [])
+        for brand in relevant_brands:
+            if brand.lower() in query_lower:
+                identified_brands.append(brand)
+        print(identified_brands, "identified_brands")
+        # 增强的价格范围识别
         price_range = {"min": 0, "max": 0}
-        for i, word in enumerate(words):
-            if "元" in word or "¥" in word or "rmb" in word:
-                try:
-                    price = float(word.replace("元", "").replace("¥", "").replace("rmb", ""))
-                    if i > 0 and words[i-1] in ["低于", "小于", "不超过"]:
-                        price_range["max"] = price
-                    elif i > 0 and words[i-1] in ["高于", "大于", "至少"]:
-                        price_range["min"] = price
-                    else:
-                        # 猜测这可能是一个基准价格
-                        price_range["min"] = price * 0.8
-                        price_range["max"] = price * 1.2
-                except (ValueError, IndexError):
-                    pass
         
+        # 1. 检查常见价格表达方式
+        price_patterns = [
+            # 模式1: "低于X元"、"不超过X元"、"X元以下"
+            ("低于", lambda x: {"min": 0, "max": x}),
+            ("不超过", lambda x: {"min": 0, "max": x}),
+            ("小于", lambda x: {"min": 0, "max": x}),
+            ("以下", lambda x: {"min": 0, "max": x}),
+            
+            # 模式2: "高于X元"、"超过X元"、"X元以上"
+            ("高于", lambda x: {"min": x, "max": 0}),
+            ("超过", lambda x: {"min": x, "max": 0}),
+            ("大于", lambda x: {"min": x, "max": 0}),
+            ("以上", lambda x: {"min": x, "max": 0}),
+            
+            # 模式3: "X元到Y元之间"、"X元-Y元"
+            ("到", lambda x, y: {"min": x, "max": y}),
+            ("至", lambda x, y: {"min": x, "max": y}),
+            ("-", lambda x, y: {"min": x, "max": y}),
+            ("~", lambda x, y: {"min": x, "max": y}),
+            
+            # 模式4: "大约X元"、"X元左右"
+            ("大约", lambda x: {"min": x * 0.8, "max": x * 1.2}),
+            ("左右", lambda x: {"min": x * 0.8, "max": x * 1.2}),
+            ("附近", lambda x: {"min": x * 0.8, "max": x * 1.2})
+        ]
+        
+        # 提取数字函数
+        def extract_number(text):
+            import re
+            nums = re.findall(r'\d+', text)
+            return float(nums[0]) if nums else 0
+        
+        # 遍历文本查找价格表达
+        for i, word in enumerate(words):
+            # 检查是否包含数字和货币符号
+            if any(char.isdigit() for char in word):
+                price_value = extract_number(word)
+                
+                # 检查价格模式
+                for pattern, handler in price_patterns:
+                    # 检查当前词
+                    if pattern in word:
+                        if handler.__code__.co_argcount == 1:
+                            price_dict = handler(price_value)
+                            price_range.update(price_dict)
+                            break
+                    
+                    # 检查相邻词的组合
+                    if i > 0 and pattern in words[i-1]:
+                        if handler.__code__.co_argcount == 1:
+                            price_dict = handler(price_value)
+                            price_range.update(price_dict)
+                            break
+                    elif i < len(words) - 1 and pattern in words[i+1]:
+                        if handler.__code__.co_argcount == 1:
+                            price_dict = handler(price_value)
+                            price_range.update(price_dict)
+                            break
+        
+        # 如果找到了数字但没有找到明确的价格范围模式，假设这是一个具体价格
+        if price_range["min"] == 0 and price_range["max"] == 0:
+            for word in words:
+                if any(char.isdigit() for char in word):
+                    try:
+                        # 提取价格数字
+                        price = extract_number(word)
+                        if price > 0:
+                            # 设置一个默认范围
+                            price_range["min"] = price * 0.8
+                            price_range["max"] = price * 1.2
+                            break
+                    except (ValueError, IndexError):
+                        pass
+        
+        # 返回最终的意图数据
+        print("Return Mock result",{"product_type": identified_category,"price_range": price_range,"brands": identified_brands,"keywords": [w for w in words if len(w) > 1 and w not in product_categories.get(identified_category, [])],"sort_preference": None})
         return {
-            "product_type": product_type,
+            "product_type": identified_category,
             "price_range": price_range,
-            "brands": [],
-            "keywords": [w for w in words if len(w) > 1 and w not in product_types],
+            "brands": identified_brands,
+            "keywords": [w for w in words if len(w) > 1 and w not in product_categories.get(identified_category, [])],
             "sort_preference": None
         }
 
