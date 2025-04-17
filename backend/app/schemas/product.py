@@ -43,7 +43,7 @@ class ProductResponse(ProductBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # 搜索相关模型
 class ProductSearchQuery(BaseModel):
@@ -63,7 +63,7 @@ class ProductSearchResponse(BaseModel):
     relevance_score: Optional[float] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class SearchResults(BaseModel):
     """搜索结果集合"""

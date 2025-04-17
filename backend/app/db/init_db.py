@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.database import engine, Base, get_db
+from app.db.database import engine, Base, get_db, async_session_factory
 from app.models.product import Product
 from app.services.product_service import ProductService
 
@@ -42,8 +42,8 @@ async def load_sample_data():
         with open(data_file, "r", encoding="utf-8") as f:
             products_data = json.load(f)
         
-        # 获取数据库会话
-        async for db in get_db():
+        # 创建数据库会话
+        async with async_session_factory() as db:
             product_service = ProductService(db)
             
             # 检查数据库是否已有产品
@@ -52,6 +52,11 @@ async def load_sample_data():
             if existing_count == 0:
                 # 只有在数据库为空时才添加示例数据
                 for product_data in products_data:
+                    if "title" in product_data:
+                        # 旧格式数据转换
+                        # 只处理新模型格式的字段
+                        continue
+                    
                     await product_service.create_product_from_dict(product_data)
                 
                 logger.info(f"成功加载 {len(products_data)} 个示例产品")

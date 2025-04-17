@@ -6,7 +6,8 @@ from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 from app.core.config import settings
 
-# 创建异步引擎
+# 确保安装了 aiosqlite 库
+# 创建异步引擎，确保使用了 aiosqlite 驱动
 engine = create_async_engine(
     settings.DATABASE_URL,
     echo=settings.DEBUG,  # 在开发模式中输出SQL语句

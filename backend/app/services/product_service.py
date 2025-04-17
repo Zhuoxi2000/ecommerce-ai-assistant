@@ -1,5 +1,5 @@
 from typing import Dict, List, Optional, Any, Union
-from sqlalchemy import select, func
+from sqlalchemy import select, func, or_, and_, desc, asc
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.product import Product
@@ -91,6 +91,89 @@ class ProductService:
         query = select(Product).order_by(Product.created_at.desc()).limit(limit)
         result = await self.db.execute(query)
         return result.scalars().all()
+        
+    async def search_products_by_intent(
+        self, 
+        intent_data: Dict[str, Any],
+        page: int = 1,
+        limit: int = 20
+    ) -> Dict[str, Any]:
+        """基于意图数据搜索产品"""
+        query = select(Product)
+        
+        # 筛选条件
+        filters = []
+        
+        # 产品类型筛选
+        if product_type := intent_data.get("product_type"):
+            if product_type != "其他":
+                filters.append(Product.category.ilike(f"%{product_type}%"))
+        
+        # 价格范围筛选
+        if price_range := intent_data.get("price_range"):
+            if price_range.get("min", 0) > 0:
+                filters.append(Product.price >= price_range["min"])
+            if price_range.get("max", 0) > 0:
+                filters.append(Product.price <= price_range["max"])
+        
+        # 品牌筛选 - 假设品牌信息可能在tags字段中
+        if brands := intent_data.get("brands"):
+            for brand in brands:
+                # 注意：这里需要根据您的实际数据结构调整
+                filters.append(Product.tags.contains([brand]))
+        
+        # 关键词筛选
+        if keywords := intent_data.get("keywords"):
+            keyword_filters = []
+            for keyword in keywords:
+                keyword_filters.append(
+                    or_(
+                        Product.name.ilike(f"%{keyword}%"),
+                        Product.description.ilike(f"%{keyword}%")
+                    )
+                )
+            if keyword_filters:
+                filters.append(or_(*keyword_filters))
+        
+        # 应用筛选条件
+        if filters:
+            query = query.where(and_(*filters))
+        
+        # 排序处理
+        sort_preference = intent_data.get("sort_preference")
+        if sort_preference:
+            if "价格" in sort_preference and "高到低" in sort_preference:
+                query = query.order_by(desc(Product.price))
+            elif "价格" in sort_preference:
+                query = query.order_by(asc(Product.price))
+            else:
+                # 默认按创建时间排序
+                query = query.order_by(desc(Product.created_at))
+        else:
+            # 默认排序
+            query = query.order_by(desc(Product.created_at))
+        
+        # 计算总数
+        total_query = select(func.count()).select_from(Product)
+        if filters:
+            total_query = total_query.where(and_(*filters))
+        
+        total_result = await self.db.execute(total_query)
+        total = total_result.scalar_one()
+        
+        # 分页
+        query = query.offset((page - 1) * limit).limit(limit)
+        result = await self.db.execute(query)
+        products = result.scalars().all()
+        
+        # 构建响应
+        return {
+            "items": products,
+            "total": total,
+            "page": page,
+            "limit": limit,
+            "pages": (total + limit - 1) // limit if limit > 0 else 0
+        }
 
 
 async def search_products(

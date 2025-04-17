@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
+from typing import List
 
 # 加载 .env 文件
 dotenv_path = Path(__file__).parent.parent.parent / ".env"
@@ -27,8 +28,9 @@ class Settings(BaseSettings):
     SECRET_KEY: str = os.getenv("SECRET_KEY", "your-secret-key-here-for-dev-only")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7天
     
-    # 跨域设置
-    ALLOWED_HOSTS: list = ["*"]  # 在生产环境中应限制为特定域名
+    # 跨域设置 - 修改这里，将字符串解析改为直接使用列表
+    # 避免从环境变量解析 JSON 列表
+    ALLOWED_HOSTS: List[str] = ["*"]  # 在生产环境中应限制为特定域名
     
     # AI服务配置
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
@@ -41,6 +43,7 @@ class Settings(BaseSettings):
     
     class Config:
         case_sensitive = True
+        env_file = dotenv_path
 
 # 创建设置实例
 settings = Settings()
