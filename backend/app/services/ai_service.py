@@ -1,7 +1,7 @@
 import json
 from typing import Dict, Any, List, Optional
 import logging
-from openai import AsyncOpenAI
+from openai import OpenAI
 
 from app.core.config import settings
 
@@ -12,7 +12,7 @@ class AIService:
     
     def __init__(self):
         """初始化AI服务"""
-        self.client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
         self.model = settings.DEFAULT_AI_MODEL
     
     async def parse_search_intent(self, query: str) -> Dict[str, Any]:
@@ -32,7 +32,8 @@ class AIService:
             
             prompt = self._build_intent_prompt(query)
             
-            response = await self.client.chat.completions.create(
+            # 使用同步API调用
+            response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {"role": "system", "content": "你是一个专业的电商搜索意图分析助手，可以从用户的自然语言查询中提取关键信息。"},
